@@ -9,6 +9,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var randomN1 = 2
+    @State private var randomN2 = 2
+    
+    
     var body: some View {
         ZStack {
             Image("background")
@@ -23,15 +28,16 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack {
-                    Image("back")
-                    Image("back")
+                    Image("card" + String(randomN1))
+                    Image("card" + String(randomN2))
                 }
                 
                 Spacer()
      
                 Button(
                     action: {
-                        //TODO
+                        self.randomN1 = Int.random(in: 2...14)
+                        self.randomN2 = Int.random(in: 2...14)
                     },
                     label: {
                         Image("dealButton").renderingMode(.original)
