@@ -10,7 +10,57 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        ZStack {
+            Image("background")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+        
+            VStack {
+                Spacer()
+                
+                Image("logo")
+                
+                Spacer()
+                
+                HStack {
+                    Image("back")
+                    Image("back")
+                }
+                
+                Spacer()
+     
+                Button(
+                    action: {
+                        //TODO
+                    },
+                    label: {
+                        Image("dealButton").renderingMode(.original)
+                    }
+                )
+                
+                Spacer()
+                
+                HStack {
+                    VStack {
+                        Text("Player")
+                        Text("0")
+                    }
+                    .padding(.leading, 20)
+                    .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Text("CPU")
+                        Text("0")
+                    }
+                    .padding(.trailing, 20)
+                    .foregroundColor(.white)
+                }
+                
+                Spacer()
+            }
+        }
     }
 }
 
