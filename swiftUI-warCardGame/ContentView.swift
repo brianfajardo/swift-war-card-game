@@ -10,9 +10,13 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var randomN1 = 2
-    @State private var randomN2 = 2
+    // Card state
+    @State private var playerCard: Int = -1
+    @State private var cpuCard: Int = -1
     
+    // Score state
+    @State private var playerScore: Int = 0
+    @State private var cpuScore: Int = 0
     
     var body: some View {
         ZStack {
@@ -28,16 +32,22 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack {
-                    Image("card" + String(randomN1))
-                    Image("card" + String(randomN2))
+                    Image(self.playerCard == -1 ? "back" : "card\(self.playerCard)")
+                    Image(self.cpuCard == -1 ? "back" : "card\(self.cpuCard)")
                 }
                 
                 Spacer()
      
                 Button(
                     action: {
-                        self.randomN1 = Int.random(in: 2...14)
-                        self.randomN2 = Int.random(in: 2...14)
+                        self.playerCard = Int.random(in: 2...14)
+                        self.cpuCard = Int.random(in: 2...14)
+                        
+                        if self.playerCard > self.cpuCard {
+                            self.playerScore += 1
+                        } else if self.cpuCard > self.playerCard {
+                            self.cpuScore += 1
+                        }
                     },
                     label: {
                         Image("dealButton").renderingMode(.original)
@@ -47,9 +57,14 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack {
+                    
+                    Spacer()
+                    
                     VStack {
                         Text("Player")
-                        Text("0")
+                            .font(.body)
+                        Text(String(playerScore))
+                            .font(.largeTitle)
                     }
                     .padding(.leading, 20)
                     .foregroundColor(.white)
@@ -58,10 +73,14 @@ struct ContentView: View {
                     
                     VStack {
                         Text("CPU")
-                        Text("0")
+                            .font(.body)
+                        Text(String(cpuScore))
+                            .font(.largeTitle)
                     }
                     .padding(.trailing, 20)
                     .foregroundColor(.white)
+                    
+                    Spacer()
                 }
                 
                 Spacer()
